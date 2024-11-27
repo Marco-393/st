@@ -3,7 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:\\Users\\HP\\Documents\\SFML-2.6.2\\include"
             ],
             "defines": [
                 "_DEBUG",
