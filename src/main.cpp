@@ -1,3 +1,5 @@
+// Ventana del Juego:
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -18,6 +20,9 @@ int main() {
 
     return 0;
 }
+
+
+Gestión de los Personajes:
 
 class Personaje {
 private:
@@ -47,8 +52,14 @@ public:
     void recibirDano(int dano) { vida -= dano; }
 };
 
+
+instancias de los personajes:
+
 Personaje jugador1("sprite_jugador1.png", 100, 400);
 Personaje jugador2("sprite_jugador2.png", 600, 400);
+
+
+Controles:
 
 void procesarControles(Personaje& jugador1, Personaje& jugador2) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) jugador1.mover(0, -1);
@@ -62,6 +73,9 @@ void procesarControles(Personaje& jugador1, Personaje& jugador2) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) jugador2.mover(1, 0);
 }
 
+
+Mecánicas de Combate:
+
 void manejarAtaque(Personaje& atacante, Personaje& defensor, sf::Keyboard::Key teclaAtaque) {
     if (sf::Keyboard::isKeyPressed(teclaAtaque)) {
         // Comprueba si están cerca para atacar
@@ -71,6 +85,9 @@ void manejarAtaque(Personaje& atacante, Personaje& defensor, sf::Keyboard::Key t
     }
 }
 
+
+Barra de Vida:
+
 sf::RectangleShape barraVida1(sf::Vector2f(200, 20));
 barraVida1.setFillColor(sf::Color::Green);
 barraVida1.setPosition(50, 50);
@@ -79,8 +96,14 @@ sf::RectangleShape barraVida2(sf::Vector2f(200, 20));
 barraVida2.setFillColor(sf::Color::Green);
 barraVida2.setPosition(550, 50);
 
+
+Actualiza las barras según la salud:
+
 barraVida1.setSize(sf::Vector2f(jugador1.getVida() * 2, 20));
 barraVida2.setSize(sf::Vector2f(jugador2.getVida() * 2, 20));
+
+
+Audio:
 
 sf::SoundBuffer bufferGolpe;
 bufferGolpe.loadFromFile("golpe.wav");
@@ -90,6 +113,9 @@ sonidoGolpe.setBuffer(bufferGolpe);
 sf::Music musica;
 musica.openFromFile("musica_fondo.ogg");
 musica.play();
+
+
+Reproduce un sonido cuando ocurre un ataque:
 
 if (atacando) {
     sonidoGolpe.play();
