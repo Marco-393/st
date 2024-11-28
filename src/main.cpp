@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-int main(int argc, char const *argv[])
-{
+int main(){
+
     sf::RenderWindow window(sf::VideoMode(800, 600), "Street Fighter - Juego");
 
     while (window.isOpen()) {
@@ -95,7 +95,7 @@ barraVida1.setPosition(50, 50);
 
 sf::RectangleShape barraVida2(sf::Vector2f(200, 20));
 barraVida2.setFillColor(sf::Color::Green);
-barraVida2.setPosition(550, 50);
+barraVida2.setPosition(50, 50);
 
 
 Actualiza las barras según la salud:
