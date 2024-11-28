@@ -3,7 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-int main() {
+int main(int argc, char const *argv[])
+{
     sf::RenderWindow window(sf::VideoMode(800, 600), "Street Fighter - Juego");
 
     while (window.isOpen()) {
