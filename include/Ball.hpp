@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include <chipmunk/chipmunk.h>
 
 class Ball {
 public:
