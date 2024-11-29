@@ -1,127 +1,17 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
-class Personaje
-{
-public:
-    Personaje(sf::Vector2f position, sf::Color color)
-    {
-        shape.setSize(sf::Vector2f(50, 50));
-        shape.setPosition(position); // Posición inicial cuadro
-        shape.setFillColor(color);
-
-        std::string personaje_1 = "ken.png";
-
-        // Cargar la imagen desde un archivo
-        
-        if (!texture.loadFromFile("assets/images/" + personaje_1))
-        {
-        
-        }
-        this->sprite = sf::Sprite(texture);
-        this->sprite.setPosition(position); // Posición inicial sprite
-    }
-
-    void move(float offsetX, float offsetY)
-    {
-        sprite.move(offsetX, offsetY);
-        shape.move(offsetX, offsetY);
-  
-    }
-
-    void draw(sf::RenderWindow &window)
-    {
-        
-        window.draw(this->sprite);
-        
-    }
-
-    void update(){
-        // Actualizar el frame de la animación
-        if (clock.getElapsedTime().asSeconds() >= frameTime)
-        {
-            currentFrame = (currentFrame + 1) % numFrames;
-            sprite.setTextureRect(sf::IntRect((currentFrame * 64)+200, 133, 100, 100));
-            clock.restart();
-        }
-    }
-
-private:
-    sf::RectangleShape shape;
-    sf::Sprite sprite;
-    sf::Texture texture;
-    sf::Clock clock;
-    float frameTime = 0.1f; // Tiempo entre cada frame en segundos
-    int currentFrame = 0;
-    int numFrames = 4; // Número total de frames en la animación
-    int frameWidth = 32;
-    int frameHeight = 32;
-};
-
-class Personaje2
-{
-public:
-    Personaje2(sf::Vector2f position, sf::Color color)
-    {
-        shape.setSize(sf::Vector2f(50, 50));
-        shape.setPosition(position); // Posición inicial cuadro
-        shape.setFillColor(color);
-
-        std::string personaje_2= "pikachu.png";
-        // Cargar la imagen desde un archivo
-        
-        if (!texture.loadFromFile("assets/images/" + personaje_2))
-        {
-        
-        }
-        this->sprite = sf::Sprite(texture);
-        this->sprite.setPosition(position); // Posición inicial sprite
-    }
-
-    void move(float offsetX, float offsetY)
-    {
-        sprite.move(offsetX, offsetY);
-        shape.move(offsetX, offsetY);
-  
-    }
-
-    void draw(sf::RenderWindow &window)
-    {
-        
-        window.draw(this->sprite);
-        
-    }
-
-    void update(){
-        // Actualizar el frame de la animación
-        if (clock.getElapsedTime().asSeconds() >= frameTime)
-        {
-            currentFrame = (currentFrame + 1) % numFrames;
-            sprite.setTextureRect(sf::IntRect((currentFrame * 64)+200, 133, 100, 100));
-            clock.restart();
-        }
-    }
-
-private:
-    sf::RectangleShape shape;
-    sf::Sprite sprite;
-    sf::Texture texture;
-    sf::Clock clock;
-    float frameTime = 0.1f; // Tiempo entre cada frame en segundos
-    int currentFrame = 0;
-    int numFrames = 4; // Número total de frames en la animación
-    int frameWidth = 32;
-    int frameHeight = 32;
-};
-
-double velocidad = 0.1;
+#include <Personaje.hpp>
+#include <Control.hpp>
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DinoChrome");
 
-    Personaje Ken(sf::Vector2f(100, 350), sf::Color::Red);
-    Personaje2 pika(sf::Vector2f(600, 350), sf::Color::Red);
+    Control control1;
+    Control control2(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::A);
+
+    Personaje Ken(sf::Vector2f(100, 350), "ken.png", control1);
+    Personaje pika(sf::Vector2f(600, 350), "pikachu.png", control2);
 
     while (window.isOpen())
     {
@@ -134,50 +24,19 @@ int main()
             }
         }
 
-        //Ken
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            Ken.move(velocidad * -1, 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            Ken.move(velocidad, 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            Ken.move(0, velocidad * -1);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            Ken.move(0, velocidad);
-        }
-
-        //Pika
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        {
-            pika.move(velocidad * -1, 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        {
-            pika.move(velocidad, 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        {
-            pika.move(0, velocidad * -1);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        {
-            pika.move(0, velocidad);
-        }
+        // Leer el teclado
+        Ken.LeerTeclado();
+        pika.LeerTeclado();
 
 
-        // Actualizar animacion pikachu
-        Ken.update();
-        pika.update();
+        // Actualizar objetos
+        Ken.Actualizar();
+        pika.Actualizar();
 
+        // Dibujar objetos
         window.clear();
-        Ken.draw(window);
-        pika.draw(window);
+        Ken.Dibujar(window);
+        pika.Dibujar(window);
         window.display();
     }
 

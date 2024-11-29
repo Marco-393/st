@@ -8,11 +8,11 @@ public:
         shape.setFillColor(color);
     }
 
-    void move(float offsetX, float offsetY) {
+    void Mover(float offsetX, float offsetY) {
         shape.move(offsetX, offsetY);
     }
 
-    void draw(sf::RenderWindow& window) {
+    void Dibujar(sf::RenderWindow& window) {
         window.draw(shape);
     }
 
@@ -36,20 +36,20 @@ int main() {
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            character.move(velocidad * -1, 0);
+            character.Mover(velocidad * -1, 0);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            character.move(velocidad, 0);
+            character.Mover(velocidad, 0);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            character.move(0, velocidad * -1);
+            character.Mover(0, velocidad * -1);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            character.move(0, velocidad);
+            character.Mover(0, velocidad);
         }
 
         window.clear();
-        character.draw(window);
+        character.Dibujar(window);
         window.display();
     }
 

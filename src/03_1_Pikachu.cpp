@@ -21,24 +21,24 @@ public:
         this->sprite.setPosition(position); // Posición inicial sprite
     }
 
-    void move(float offsetX, float offsetY)
+    void Mover(float offsetX, float offsetY)
     {
         sprite.move(offsetX, offsetY);
         shape.move(offsetX, offsetY);
     }
 
-    void draw(sf::RenderWindow &window)
+    void Dibujar(sf::RenderWindow &window)
     {
         // window.draw(this->shape);
         window.draw(this->sprite);
     }
 
-    void update(){
+    void Actualizar(){
         // Actualizar el frame de la animación
         if (clock.getElapsedTime().asSeconds() >= frameTime)
         {
-            currentFrame = (currentFrame + 1) % numFrames;
-            sprite.setTextureRect(sf::IntRect((currentFrame * 64)+17, 133, 64, 36));
+            cuadroActual = (cuadroActual + 1) % numFrames;
+            sprite.setTextureRect(sf::IntRect((cuadroActual * 64)+17, 133, 64, 36));
             clock.restart();
         }
     }
@@ -49,7 +49,7 @@ private:
     sf::Texture texture;
     sf::Clock clock;
     float frameTime = 0.1f; // Tiempo entre cada frame en segundos
-    int currentFrame = 0;
+    int cuadroActual = 0;
     int numFrames = 4; // Número total de frames en la animación
     int frameWidth = 32;
     int frameHeight = 32;
@@ -76,26 +76,26 @@ int main()
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            pika.move(velocidad * -1, 0);
+            pika.Mover(velocidad * -1, 0);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            pika.move(velocidad, 0);
+            pika.Mover(velocidad, 0);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            pika.move(0, velocidad * -1);
+            pika.Mover(0, velocidad * -1);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            pika.move(0, velocidad);
+            pika.Mover(0, velocidad);
         }
 
         // Actualizar animacion pikachu
-        pika.update();
+        pika.Actualizar();
 
         window.clear();
-        pika.draw(window);
+        pika.Dibujar(window);
         window.display();
     }
 
