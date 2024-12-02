@@ -12,10 +12,10 @@ private:
 public:
     Control()
     {
-        this->arriba = sf::Keyboard::Left;
-        this->abajo = sf::Keyboard::Right;
-        this->derecha = sf::Keyboard::Up;
-        this->izquierda = sf::Keyboard::Down;
+        this->arriba = sf::Keyboard::Up;
+        this->abajo = sf::Keyboard::Down;
+        this->derecha = sf::Keyboard::Right;
+        this->izquierda = sf::Keyboard::Left;
     }
     Control(sf::Keyboard::Key arriba,
             sf::Keyboard::Key abajo,
