@@ -2,10 +2,12 @@
 #include <SFML/Audio.hpp>
 #include <Personaje.hpp>
 #include <Control.hpp>
+#include <Vida.hpp>
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DinoChrome");
+     window.setFramerateLimit(400);
 
     Control control1;
     Control control2(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::A);

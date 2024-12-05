@@ -46,7 +46,7 @@ public:
         if (clock.getElapsedTime().asSeconds() >= frameTime)
         {
             cuadroActual = (cuadroActual + 1) % numFrames;
-            sprite.setTextureRect(sf::IntRect((cuadroActual * 64)+200, 133, 100, 100));
+            sprite.setTextureRect(sf::IntRect((cuadroActual * 64)+17, 133, 64, 36));
             clock.restart();
         }
     }
