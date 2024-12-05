@@ -8,6 +8,10 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DinoChrome");
 
+    // Barra de vida (frente)
+    sf::RectangleShape lifeBar(sf::Vector2f(200, 650));
+    lifeBar.setFillColor(sf::Color::Green);
+
     Control control1;
     Control control2(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::A);
 
@@ -19,10 +23,6 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            // Barra de vida (frente)
-            sf::RectangleShape lifeBar(sf::Vector2f(200, 650));
-            lifeBar.setFillColor(sf::Color::Green);
-        
             if (event.type == sf::Event::Closed)
             {
                 window.close();
@@ -40,6 +40,7 @@ int main()
 
         // Dibujar objetos
         window.clear();
+        lifeBar.Dibujar(window);
         Ken.Dibujar(window);
         pika.Dibujar(window);
         window.display();
