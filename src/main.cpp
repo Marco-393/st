@@ -7,19 +7,22 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DinoChrome");
-     window.setFramerateLimit(400);
 
     Control control1;
     Control control2(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::A);
 
-    Personaje Ken(sf::Vector2f(100, 350), "ken.png", control1);
-    Personaje pika(sf::Vector2f(600, 350), "pikachu.png", control2);
+    Personaje Ken(sf::Vector2f(600, 350), "ken.png", control1);
+    Personaje pika(sf::Vector2f(100, 350), "pikachu.png", control2);
 
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
+            // Barra de vida (frente)
+            sf::RectangleShape lifeBar(sf::Vector2f(200, 650));
+            lifeBar.setFillColor(sf::Color::Green);
+        
             if (event.type == sf::Event::Closed)
             {
                 window.close();
